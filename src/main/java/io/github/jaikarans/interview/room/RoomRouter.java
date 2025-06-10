@@ -21,7 +21,7 @@ public class RoomRouter {
     public RouterFunction<ServerResponse> route(RoomHandler handler) {
         return RouterFunctions.route()
                 .POST("/rooms", handler::createRoom)
-                .GET("/{id}", handler::getRoomById)
+                .GET("/{id}", handler::serveRoomView)
                 .build();
     }
 }

@@ -2,6 +2,7 @@ package io.github.jaikarans.interview.room.service;
 
 import io.github.jaikarans.interview.room.model.Room;
 import io.github.jaikarans.interview.room.repository.RoomRepository;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -38,4 +39,13 @@ public class RoomService {
     public Mono<Room> getRoomById(String id) {
         return roomRepository.findById(id);
     }
+
+    public Mono<Boolean> isRoomExists(String id) {
+        if (id == null) {
+            return Mono.just(false);
+        }
+
+        return roomRepository.existsById(id);
+    }
+
 }

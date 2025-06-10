@@ -37,7 +37,7 @@
         })
             .then(response => response.json())
             .then(data => {
-                const meetingLink = window.location.origin + '/rooms/' + data.id;
+                const meetingLink = window.location.origin + '/' + data.id;
                 alert('Your meeting link: ' + meetingLink);
             })
             .catch(error => {

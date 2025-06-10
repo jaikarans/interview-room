@@ -3,7 +3,10 @@ package io.github.jaikarans.interview.room.handler;
 import io.github.jaikarans.interview.room.service.RoomService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
+import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
@@ -31,6 +34,18 @@ public class RoomHandler {
     public Mono<ServerResponse> getRoomById(ServerRequest request) {
         return roomService.getRoomById(request.pathVariable("id"))
                 .flatMap(room -> ServerResponse.ok().bodyValue(room));
+    }
+
+    public Mono<ServerResponse> serveRoomView(ServerRequest request) {
+        return roomService.isRoomExists(request.pathVariable("id"))
+                .flatMap(exits -> {
+                    if (!exits) {
+                        return ServerResponse.notFound().build();
+                    }
+                    return ServerResponse.ok()
+                            .contentType(MediaType.TEXT_HTML)
+                            .body(BodyInserters.fromResource(new ClassPathResource("static/room.html")));
+                });
     }
 
 }
