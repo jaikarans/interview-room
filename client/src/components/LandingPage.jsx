@@ -27,6 +27,14 @@ const LandingPage = () => {
   
   }
 
+  const createInstantMeeting = async () => {
+    await axios.post('/rooms')
+      .then((res) => {
+        const link = 'http://localhost:8080/' + res.data.id;
+        window.location.href = link;
+      })
+  }
+
   return (
     <Box>
       <ColorModeButton />
@@ -45,7 +53,7 @@ const LandingPage = () => {
           <Menu.Positioner>
             <Menu.Content>
               <Menu.Item onClick={createMeeting} value="new-meeting">Create a meeting for later</Menu.Item>
-              <Menu.Item value="instant-meeting">Create an instant meeting</Menu.Item>
+              <Menu.Item onClick={createInstantMeeting} value="instant-meeting">Create an instant meeting</Menu.Item>
             </Menu.Content>
           </Menu.Positioner>
         </Portal>
