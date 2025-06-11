@@ -28,7 +28,7 @@ public class RoomHandler {
      */
     public Mono<ServerResponse> createRoom(ServerRequest request) {
         return roomService.createRoom()
-                .flatMap(room -> ServerResponse.created(URI.create(request.uri()+"/"+room.getId())).bodyValue(room));
+                .flatMap(room -> ServerResponse.created(URI.create(request.uri().getScheme()+"://"+request.uri().getAuthority()+"/"+room.getId())).bodyValue(room));
     }
 
     public Mono<ServerResponse> getRoomById(ServerRequest request) {
