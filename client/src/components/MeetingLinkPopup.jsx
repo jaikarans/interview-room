@@ -1,4 +1,4 @@
-  import { Box, Button, Clipboard, CloseButton, Code, Dialog, HStack, IconButton, Portal, Spacer, Text } from "@chakra-ui/react";
+  import { Clipboard, CloseButton, Dialog, HStack, IconButton, Portal, Spacer, Text } from "@chakra-ui/react";
   import { useEffect, useRef } from "react";
 import { useColorModeValue } from "./ui/color-mode";
 
@@ -15,7 +15,6 @@ import { useColorModeValue } from "./ui/color-mode";
     }, [isPopupOpen]);
 
     const bg = useColorModeValue("gray.100", "gray.700"); // light/dark mode aware subtle bg
-    const borderColor = useColorModeValue("gray.300", "gray.600");
   
   
 

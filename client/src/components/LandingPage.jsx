@@ -17,8 +17,9 @@ const LandingPage = () => {
     await axios.post('/rooms')
       .then((res) => {
         setIsPopupOpen(true);
-        setMeetingLink(res.headers.location);
-        console.log(isPopupOpen,res.headers.location);
+        const meetingPageLink = window.location.origin+ '/' + res.data.id;
+        setMeetingLink(meetingPageLink);
+        console.log(isPopupOpen,meetingPageLink);
       })
       .catch((err) => {
         console.log('Error creating room:', err);
@@ -29,7 +30,7 @@ const LandingPage = () => {
   const createInstantMeeting = async () => {
     await axios.post('/rooms')
       .then((res) => {
-        window.location.href = res.headers.location;
+        window.location.href = window.location.origin + '/' + res.data.id;
       })
       .catch((err) => {
         console.log('Error creating romm:', err);
