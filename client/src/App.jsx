@@ -1,14 +1,16 @@
 import './App.css';
 
-import { Box } from '@chakra-ui/react';
 import LandingPage from './components/LandingPage';
+import { Route, Routes } from 'react-router-dom';
+import MeetingRoom from './components/room/MeetingRoom';
 
 function App() {
   
   return (
-    <Box>
-      <LandingPage />
-    </Box>
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/:roomId" element={<MeetingRoom />} />
+    </Routes>
   );
 }
 
