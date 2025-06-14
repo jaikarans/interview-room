@@ -33,9 +33,14 @@ public class RoomHandler {
 
     public Mono<ServerResponse> getRoomById(ServerRequest request) {
         return roomService.getRoomById(request.pathVariable("id"))
-                .flatMap(room -> ServerResponse.ok().bodyValue(room));
+                .flatMap(room -> ServerResponse.ok().bodyValue(room))
+                .switchIfEmpty(ServerResponse.noContent().build());
     }
 
+    public Mono<ServerResponse> getRoomExists(ServerRequest request) {
+        return roomService.isRoomExists(request.pathVariable("id"))
+                .flatMap(exits -> ServerResponse.ok().bodyValue(exits));
+    }
     public Mono<ServerResponse> serveRoomView(ServerRequest request) {
         return roomService.isRoomExists(request.pathVariable("id"))
                 .flatMap(exits -> {
