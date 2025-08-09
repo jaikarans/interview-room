@@ -1,6 +1,7 @@
 import { Box, HStack, IconButton } from "@chakra-ui/react";
 import { Mic, MicOff, Video, VideoOff } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { ColorModeButton } from "../ui/color-mode";
 
 const MediaPreview = ({roomExist}) => {
   const [micOn, setMicOn] = useState(true);
@@ -54,7 +55,7 @@ const MediaPreview = ({roomExist}) => {
       width="60%"
       height="70%"
       >
-
+      <ColorModeButton />
       {/* Video Placeholder */}
       {/* <Box rounded={"xl"} overflow={"hidden"}> */}
       <video

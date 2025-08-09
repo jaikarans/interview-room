@@ -10,16 +10,46 @@ import {
 } from '@chakra-ui/react'
 
 export const toaster = createToaster({
-  placement: 'bottom-end',
+  placement: 'bottom',
   pauseOnPageIdle: true,
 })
+
+const toastStyles = {
+  success: {
+    bg: 'primary',
+    color: 'onPrimary',
+    indicator: <Toast.Indicator />,
+  },
+  error: {
+    bg: 'error',
+    color: 'onError',
+    indicator: <Toast.Indicator />,
+  },
+  loading: {
+    bg: 'blue.50',
+    color: 'blue.800',
+    indicator: <Spinner size="sm" color="blue.600" />,
+  },
+  info: {
+    bg: 'gray.50',
+    color: 'gray.800',
+    indicator: <Toast.Indicator />,
+  },
+}
 
 export const Toaster = () => {
   return (
     <Portal>
       <ChakraToaster toaster={toaster} insetInline={{ mdDown: '4' }}>
         {(toast) => (
-          <Toast.Root width={{ md: 'sm' }}>
+          // toast.type =  "success" | "error" | "loading" | "info"
+          <Toast.Root 
+            bg={toastStyles[toast.type].bg}
+            color={toastStyles[toast.type].color}
+            placement={toastStyles[toast.type].position}
+            width={{ md: 'sm' }}
+            borderRadius='xl'
+          >
             {toast.type === 'loading' ? (
               <Spinner size='sm' color='blue.solid' />
             ) : (

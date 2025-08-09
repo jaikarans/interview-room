@@ -1,7 +1,9 @@
 'use client'
 
-import { ClientOnly, IconButton, Skeleton, Span } from '@chakra-ui/react'
+import { Box, ClientOnly, IconButton, Skeleton, Span } from '@chakra-ui/react'
 import { ThemeProvider, useTheme } from 'next-themes'
+import Ripples from 'react-ripples'
+
 
 import * as React from 'react'
 import { LuMoon, LuSun } from 'react-icons/lu'
@@ -40,22 +42,31 @@ export const ColorModeButton = React.forwardRef(
     const { toggleColorMode } = useColorMode()
     return (
       <ClientOnly fallback={<Skeleton boxSize='8' />}>
-        <IconButton
-          onClick={toggleColorMode}
-          variant='ghost'
-          aria-label='Toggle color mode'
-          size='sm'
-          ref={ref}
-          {...props}
-          css={{
-            _icon: {
-              width: '5',
-              height: '5',
-            },
-          }}
-        >
-          <ColorModeIcon />
-        </IconButton>
+            <IconButton
+              bg="surfaceContainer"
+              color="onSurfaceVariant"
+              borderColor="outlineVariant"
+              _hover={{
+                bg: 'secondaryContainer',
+                color: 'onSecondaryContainer',
+                borderColor: 'outline',
+              }}
+              borderRadius="full"
+              onClick={toggleColorMode}
+              variant='ghost'
+              aria-label='Toggle color mode'
+              size='sm'
+              ref={ref}
+              {...props}
+              css={{
+                _icon: {
+                  width: '5',
+                  height: '5',
+                },
+              }}
+            >
+              <ColorModeIcon />
+            </IconButton>
       </ClientOnly>
     )
   },

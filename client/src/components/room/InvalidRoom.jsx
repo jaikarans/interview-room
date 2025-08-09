@@ -1,9 +1,11 @@
 import { Center, HStack, Spacer, Text, VStack } from "@chakra-ui/react";
+import { ColorModeButton } from "../ui/color-mode";
 
 const InvalidRoom = () => {
   
   return (
     <Center width="100vw" height="100vh">
+      <ColorModeButton />
       <VStack>
         <Text textStyle="4xl">
           Check your meeting code

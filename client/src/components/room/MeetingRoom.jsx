@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import WaitingRoom from "./WaitingRoom";
 import InvalidRoom from "./InvalidRoom";
+import { ColorModeButton } from "../ui/color-mode";
 
 const MeetingRoom = () => {
   const [roomExist, SetRoomExist] = useState(null);
@@ -22,6 +23,14 @@ const MeetingRoom = () => {
       
   }, []);
 
+  useEffect(() => {
+    if (roomExist) {
+      const wsProtocol = window.location.protocol === "https:" ? "wss" : "ws";
+      const wsUrl = `${wsProtocol}://localhost:8080/ws${window.location.pathname}`;
+      
+    }
+  }, [roomExist])
+
 
 
   if (roomExist === false) {
@@ -29,7 +38,8 @@ const MeetingRoom = () => {
   }
 
   return (
-    <> 
+    <>
+      <ColorModeButton />
       <WaitingRoom roomExist={roomExist} />
     </>
   );
