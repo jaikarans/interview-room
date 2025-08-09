@@ -1,10 +1,7 @@
-import { Box, Button, Card, HStack, Image, Input, Menu, Portal, Spacer, Text } from "@chakra-ui/react";
+import { Box, HStack, Image, Spacer, Text } from "@chakra-ui/react";
 import { ColorModeButton, useColorModeValue } from "./ui/color-mode";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import MeetingLinkPopup from "./MeetingLinkPopup";
-import { system } from "./ui/theme";
-import { Toaster, toaster } from "./ui/toaster";
 import MeetingHero from "./MeetingHero";
 
 

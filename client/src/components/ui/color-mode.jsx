@@ -1,8 +1,7 @@
 'use client'
 
-import { Box, ClientOnly, IconButton, Skeleton, Span } from '@chakra-ui/react'
+import { ClientOnly, IconButton, Skeleton, Span } from '@chakra-ui/react'
 import { ThemeProvider, useTheme } from 'next-themes'
-import Ripples from 'react-ripples'
 
 
 import * as React from 'react'
