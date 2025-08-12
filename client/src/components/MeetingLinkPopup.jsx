@@ -1,8 +1,9 @@
-  import { Clipboard, CloseButton, Dialog, HStack, IconButton, Portal, Spacer, Text } from "@chakra-ui/react";
-  import { useEffect, useRef } from "react";
-import { useColorModeValue } from "./ui/color-mode";
+"use client"
 
-  const MeetingLinkPopup = ({ isPopupOpen, setIsPopupOpen, meetingLink, setMeetingLink }) => {
+import { Clipboard, CloseButton, Dialog, Group, HStack, IconButton, Portal, Spacer, Text, useSlotRecipe } from "@chakra-ui/react";
+import { useEffect, useRef } from "react";
+
+  const MeetingLinkPopup = ({props, isPopupOpen, setIsPopupOpen, meetingLink, setMeetingLink }) => {
 
     const copyBtnRef = useRef(null);
 
@@ -14,9 +15,18 @@ import { useColorModeValue } from "./ui/color-mode";
 
     }, [isPopupOpen]);
 
-    const bg = useColorModeValue("gray.100", "gray.700"); // light/dark mode aware subtle bg
-  
-  
+    const ClipboardIconButton = () => {
+      return (
+        <Clipboard.Trigger asChild borderRadius="full">
+          <IconButton bg="surface-container" color="on-surface" _hover={{borderRadius:'full', bg:'surface-container-highest'}}>
+            <Clipboard.Indicator />
+          </IconButton>
+        </Clipboard.Trigger>
+      )
+    }
+    
+    const recipe = useSlotRecipe({ key: "popup" });
+    const style = recipe();
 
     return (
       <HStack wrap="wrap" width={20} gap="4">
@@ -31,40 +41,34 @@ import { useColorModeValue } from "./ui/color-mode";
             }}
             key={"center"}
             placement={"center"}
-            motionPreset="slide-in-bottom"
+            css={style.root}
+
           >
             <Portal>
               <Dialog.Backdrop />
               <Dialog.Positioner>
-                <Dialog.Content>
-                  <Dialog.Header>
-                    <Dialog.Title>Here's your joining Information</Dialog.Title>
+                <Dialog.Content css={style.content}>
+                  <Dialog.Header css={style.header}>
+                    Here's your joining Information
+                    <Dialog.CloseTrigger asChild css={style.closeTrigger}>
+                      <CloseButton />
+                    </Dialog.CloseTrigger>
                   </Dialog.Header>
-                  <Dialog.Body>
-                    Send this to person you want to meet with. Make sure that you save it so that you can use it later, too.
+                  <Dialog.Body css={style.body} >
+                    <Text>
+                      Send this link to person you want to meet with. Make sure that you save it so that you can use it later, too.
+                    </Text>
+                    <Clipboard.Root ref={copyBtnRef} value={meetingLink}>
+                      <Group flexGrow="1" borderRadius="4px" w="full" bg="surface-container" color="on-surface">
+                        <Clipboard.ValueText flexGrow="1" fontWeight="400" fontSize="1rem" gap="0.5rem" pl=".75rem" />
+                        <Spacer />
+                        <ClipboardIconButton />
+                      </Group>
+                    </Clipboard.Root>
                     <Spacer />
-                    <HStack borderRadius={10} padding={2} wrap="wrap" bg={bg} variant={"outline"} fullWidth>
-                      <Text fontWeight={"bold"} fontSize={"bg"}>
-                        {meetingLink}
-                      </Text>
-                      <Spacer />
-                      <Clipboard.Root ref={copyBtnRef} border={0} value={meetingLink}>
-                        <Clipboard.Trigger ref={copyBtnRef} asChild>
-                          <IconButton variant="ghost"
-                            size="bg"
-                            _hover={{ bg: "gray.200" }}
-                            _focus={{ boxShadow: "none" }}
-                            _active={{ bg: "gray.300" }}
-                          >
-                            <Clipboard.Indicator />
-                          </IconButton>
-                        </Clipboard.Trigger>
-                      </Clipboard.Root>
-                    </HStack>
+                    <Spacer />
                   </Dialog.Body>
-                  <Dialog.CloseTrigger asChild>
-                    <CloseButton size="sm"/>
-                  </Dialog.CloseTrigger>
+                  
                 </Dialog.Content>
               </Dialog.Positioner>
             </Portal>

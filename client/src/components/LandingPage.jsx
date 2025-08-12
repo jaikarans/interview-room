@@ -1,25 +1,17 @@
+"use client"
+
 import { Box, HStack, Image, Spacer, Text } from "@chakra-ui/react";
 import { ColorModeButton, useColorModeValue } from "./ui/color-mode";
-import { useEffect, useState } from "react";
-import MeetingLinkPopup from "./MeetingLinkPopup";
 import MeetingHero from "./MeetingHero";
 
 
 const LandingPage = () => {
 
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [meetingLink, setMeetingLink] = useState('');
-
-  useEffect(() => {
-    console.log("isPopupOpen changed:", isPopupOpen);
-  }, [isPopupOpen]);
-  
-
   return (
     <Box
-      fontFamily='"Google Sans", Roboto, Arial, sans-serif'
-      bg="surfaceDim"
-      color="onSurfaceVariant"
+      fontFamily="body"
+      bg="surface-dim"
+      color="on-surface-variant"
       w="100vw" h="100vh"
       display="flex"
       flexDirection="column"
@@ -27,7 +19,7 @@ const LandingPage = () => {
     >
       {/* Navigation Bar */}
       <Box
-        bg="surfaceContainer"
+        bg="surface-container"
         p="1" 
         borderBottomWidth="1px"
         borderColor={useColorModeValue("border.light", "border.dark")}
@@ -35,7 +27,7 @@ const LandingPage = () => {
         <HStack color="primary" px="12px">
           <Text
             as="h1"
-            fontFamily='"Google Sans", Roboto, Arial, sans-serif'
+            fontFamily='header'
             fontSize="1.4rem"
             fontWeight="200"
             letterSpacing="0"
@@ -48,11 +40,7 @@ const LandingPage = () => {
         </HStack>
 
       </Box>
-      <MeetingLinkPopup isPopupOpen={isPopupOpen}
-        setIsPopupOpen={setIsPopupOpen}
-        meetingLink={meetingLink}
-        setMeetingLink={setMeetingLink}
-      />
+
 
       {/* main page */}
       <Box

@@ -5,7 +5,7 @@ export const buttonRecipe = defineRecipe({
     variant: {
       filled: {
         bg: "primary",
-        color: "onPrimary",
+        color: "on-primary",
         h: "3rem",
         fontSize: "1rem",
         fontWeight: "medium",
@@ -18,7 +18,7 @@ export const buttonRecipe = defineRecipe({
             content: '""',
             position: "absolute",
             inset: 0,
-            bg: "onPrimary", // the on-color
+            bg: "on-primary", // the on-color
             opacity: 0.08,   // 8% for hover
             pointerEvents: "none",
           }
@@ -26,12 +26,12 @@ export const buttonRecipe = defineRecipe({
       },
       textButton: {
         bg: "background",
-        color: "onSurface",
+        color: "on-surface",
         borderRadius: '2rem',
         h: "3rem",
         _hover: {
-          bg: "primaryContainer",
-          color: "onPrimaryContainer",
+          bg: "primary-container",
+          color: "on-primary-container",
         }, 
       },   
     },

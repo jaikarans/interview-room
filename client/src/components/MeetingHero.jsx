@@ -3,19 +3,29 @@
 import { Box, Button, Card, Input, Menu, Portal, Spacer } from "@chakra-ui/react";
 import axios from "axios";
 import { Toaster, toaster } from "./ui/toaster";
+import { useState } from "react";
+import MeetingLinkPopup from "./MeetingLinkPopup";
 
 
 const MeetingHero = (props) => {
 
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [meetingLink, setMeetingLink] = useState('');
+
   const createMeeting = async () => {
     await axios.post('/rooms')
       .then((res) => {
-        // setIsPopupOpen(true);
+        setIsPopupOpen(true);
         const meetingPageLink = window.location.origin+ '/' + res.data.id;
-        // setMeetingLink(meetingPageLink);
-        // console.log(isPopupOpen,meetingPageLink);
+        setMeetingLink(meetingPageLink);
       })
       .catch((err) => {
+        // for testing popup dialog
+        // setIsPopupOpen(true);
+        // const meetingPageLink = window.location.origin+ '/' + 'abc-def-ijk';
+        // setMeetingLink(meetingPageLink);
+        // console.log('llll', isPopupOpen,meetingPageLink);
+
         // show a error toast to user
         toaster.error({
           title: err.code,
@@ -46,6 +56,11 @@ const MeetingHero = (props) => {
     alignItems="center"
     justifyContent="center"
   >
+    <MeetingLinkPopup isPopupOpen={isPopupOpen}
+      setIsPopupOpen={setIsPopupOpen}
+      meetingLink={meetingLink}
+      setMeetingLink={setMeetingLink}
+    />
     <Toaster />
     <Card.Root
       p="5"
@@ -56,9 +71,11 @@ const MeetingHero = (props) => {
       <Card.Body userSelect="none" gap="2">
         <Card.Title
           as="h1"
-          fontFamily='"Google Sans", Roboto, Arial, sans-serif'
+          fontFamily='"Inter Tight", sans-serif'
+          fontOpticalSizing="auto"
+          fontStyle="normal"
           fontSize="2.8125rem"
-          fontWeight="400"
+          fontWeight="700"
           letterSpacing="0"
           lineHeight="3.25rem"
           pb="0.5rem"
@@ -68,7 +85,9 @@ const MeetingHero = (props) => {
           One Unified Space for Every Interview
         </Card.Title>
         <Card.Description
-          fontFamily='"Google Sans", Roboto, Arial, sans-serif'
+          fontFamily='"Inter", sans-serif'
+          fontOpticalSizing="auto"
+          fontStyle="normal"
           fontSize="1.375rem"
           fontWeight="400"
           letterSpacing="0"
@@ -89,17 +108,17 @@ const MeetingHero = (props) => {
           </Menu.Trigger>
           <Portal>
             <Menu.Positioner>
-              <Menu.Content bg="secondaryContainer" color="onSecondaryContainer">
+              <Menu.Content bg="secondary-container" color="on-secondary-container">
                 <Menu.Item onClick={createMeeting} value="new-meeting"
                   _hover={{
                     bg: 'primary',
-                    color: 'onPrimary'
+                    color: 'on-primary'
                   }}
                 > Create a meeting for later </Menu.Item>
                 <Menu.Item onClick={createInstantMeeting} value="instant-meeting"
                   _hover={{
                     bg: 'primary',
-                    color: 'onPrimary'
+                    color: 'on-primary'
                   }}
                 > Create an instant meeting </Menu.Item>
               </Menu.Content>
