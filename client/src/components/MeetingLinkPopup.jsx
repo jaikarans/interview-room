@@ -18,7 +18,7 @@ import { useEffect, useRef } from "react";
     const ClipboardIconButton = () => {
       return (
         <Clipboard.Trigger asChild borderRadius="full">
-          <IconButton bg="surface-container" color="on-surface" _hover={{borderRadius:'full', bg:'surface-container-highest'}}>
+          <IconButton size="xl" bg="surface-container" color="on-surface" _hover={{borderRadius:'full', bg:'surface-container-highest'}}>
             <Clipboard.Indicator />
           </IconButton>
         </Clipboard.Trigger>
@@ -47,7 +47,9 @@ import { useEffect, useRef } from "react";
             <Portal>
               <Dialog.Backdrop />
               <Dialog.Positioner>
-                <Dialog.Content css={style.content}>
+                <Dialog.Content css={style.content}
+                  onFocusCapture={(e) => e.target.blur()} 
+                >
                   <Dialog.Header css={style.header}>
                     Here's your joining Information
                     <Dialog.CloseTrigger asChild css={style.closeTrigger}>
