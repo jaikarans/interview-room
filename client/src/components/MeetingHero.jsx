@@ -21,16 +21,17 @@ const MeetingHero = (props) => {
       })
       .catch((err) => {
         // for testing popup dialog
-        // setIsPopupOpen(true);
+        setIsPopupOpen(true);
         // const meetingPageLink = window.location.origin+ '/' + 'abc-def-ijk';
-        // setMeetingLink(meetingPageLink);
-        // console.log('llll', isPopupOpen,meetingPageLink);
+        const meetingPageLink = 'interview-room.com/abc-def-efg';
+        setMeetingLink(meetingPageLink);
+        console.log('llll', isPopupOpen,meetingPageLink);
 
         // show a error toast to user
-        toaster.error({
-          title: err.code,
-          description: err.message,
-        });
+        // toaster.error({
+        //   title: err.code,
+        //   description: err.message,
+        // });
       });
   }
 
@@ -50,6 +51,8 @@ const MeetingHero = (props) => {
 
   return(
     <Box
+    p='0'
+    m='0'
     flex="1"
     display="flex"
     flexDirection="column"
@@ -63,7 +66,7 @@ const MeetingHero = (props) => {
     />
     <Toaster />
     <Card.Root
-      p="5"
+      p="0"
       bg="background"
       border="none"
       maxW="35rem"
@@ -99,8 +102,11 @@ const MeetingHero = (props) => {
         </Card.Description> 
       </Card.Body>
       <Card.Footer
+          pb="0"
+          flex="1"
           display="flex"
-          flex-direction="column"
+          alignItems='flex-start'
+          flexDirection={{base: "column", md: 'row'}}
       >
         <Menu.Root>
           <Menu.Trigger asChild>
@@ -125,18 +131,27 @@ const MeetingHero = (props) => {
             </Menu.Positioner>
           </Portal>
         </Menu.Root>
-        <Spacer/>
-        <Input
-          border="1px solid"
-          borderRadius="0.75rem"
-          h="2.7rem"
-          fontSize="1rem"
-          fontWeight="medium"
-          pl="1rem"
-          pr="1rem"  
-          placeholder="Enter a code or link"
-        />
-        <Button variant="textButton"> Join </Button>
+        {/* <Spacer/> */}
+        <Box
+          // pl={{base: '1rem', md: '0px'}}
+          w={{md: '100%'}}
+          flex='1'
+          display='flex'
+          flexDirection='row'
+          alignItems='center'
+          gap={1}
+        >
+          <Input
+            // flexGrow={1}
+            border="1px solid"
+            borderRadius="0.75rem"
+            fontSize="1rem"
+            fontWeight="medium"
+            placeholder="Enter a code or link"
+          />
+          <Spacer />
+          <Button variant="textButton"> Join </Button>
+        </Box>
       </Card.Footer>
     </Card.Root>
   </Box>

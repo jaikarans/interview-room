@@ -55,17 +55,30 @@ const LandingPage = () => {
           gap="0"
           spacing={0}
           display="flex"
-          flexDirection="row-reverse"
+          // flexDirection="row-reverse"
           align="stretch" // This makes children fill height
+          alignItems='center'
           color="onSurface"
+          flexDirection={{ base: "column", md: "row" }} // stack on mobile
         >
-          <Image
-            w="50vw" flex="1" 
-            src="/freepik_img.png"
-            objectFit="cover"
-            display="block" // removes inline-block gap
-          />
           <MeetingHero />
+          <Box
+            flex='1'
+            flexGrow='1'
+            display='flex'
+            alignItems='center'
+            flexDirection='column'
+            w={{ base: "50%", md: "100%" }}
+            h="100%"
+          >
+            <Image
+              src="/freepik_img.png"
+              objectFit="contain" // preserves aspect ratio without cropping
+              w="100%"             // half the width of parent
+              h="100%"             // half the height of parent
+              display="block"
+            />
+          </Box>
         </HStack>
       </Box>
     </Box>
