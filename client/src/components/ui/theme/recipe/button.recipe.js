@@ -33,7 +33,24 @@ export const buttonRecipe = defineRecipe({
           bg: "primary-container",
           color: "on-primary-container",
         }, 
-      },   
+      },
+      
+      'circular-secondary-inactive' : {
+        borderRadius: 'full',
+        bg: 'secondary-container',
+        color: 'on-secondary-container',
+        
+      },
+      
+      'circular-secondary-active' : {
+        borderRadius: 'full',
+        bg: 'secondary',
+        color: 'on-secondary',
+        
+      },
+
+
+      
     },
   },
 });
