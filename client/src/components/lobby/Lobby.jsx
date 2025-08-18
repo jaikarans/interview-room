@@ -7,7 +7,7 @@ const Lobby = () => {
 	return (
 		<Box>
 			{/* <VideoAudioCard /> */}
-			<VideoAudioCard />
+			<VideoAudioCard cardSize="medium"/>
 			{/* <VideoAudioCar	d /> */}
 			{/* <VideoAudioCard /> */}
 		</Box>

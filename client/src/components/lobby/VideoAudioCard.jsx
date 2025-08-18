@@ -3,7 +3,13 @@ import { useRef, useState } from "react";
 import { LuEye, LuEyeClosed, LuMic, LuMicOff, LuVideo, LuVideoOff } from "react-icons/lu";
 import { toaster, Toaster } from "../ui/toaster";
 
-const VideoAudioCard = () => {
+const sizes = {
+  medium: { w: "1047px", h: "588px" }, // lobby size
+  small: { w: "400px", h: "225px" },   // interview size
+};
+
+// cardSize = "medium" | "small"
+const VideoAudioCard = ({cardSize}) => {
 
   const [videoOn, setVideoOn] = useState(false);
   const [micOn, setMicOn] = useState(false);
@@ -121,8 +127,10 @@ const VideoAudioCard = () => {
 
   return(
     <Card.Root
-      w="1047px"
-      h="588px"
+      // w="1047px"
+      // h="588px"
+      w={sizes[cardSize].w}
+      h={sizes[cardSize].h}
       borderRadius='3xl'
       opacity={ isCardVisible ? 1 : '0.2' }
       _hover={{ opacity: isCardVisible ? 1 : 0.4 }}
