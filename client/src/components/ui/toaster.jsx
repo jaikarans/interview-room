@@ -17,12 +17,12 @@ export const toaster = createToaster({
 const toastStyles = {
   success: {
     bg: 'primary',
-    color: 'onPrimary',
+    color: 'on-primary',
     indicator: <Toast.Indicator />,
   },
   error: {
     bg: 'error',
-    color: 'onError',
+    color: 'on-error',
     indicator: <Toast.Indicator />,
   },
   loading: {
