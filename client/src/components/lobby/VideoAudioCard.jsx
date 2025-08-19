@@ -4,12 +4,13 @@ import { LuEye, LuEyeClosed, LuMic, LuMicOff, LuVideo, LuVideoOff } from "react-
 import { toaster, Toaster } from "../ui/toaster";
 
 const sizes = {
-  medium: { w: "1047px", h: "588px" }, // lobby size
+  // medium: { w: "1047px", h: "588px" }, // lobby size
+  medium: { w: "740px", h: "416px" }, // lobby size
   small: { w: "400px", h: "225px" },   // interview size
 };
 
 // cardSize = "medium" | "small"
-const VideoAudioCard = ({cardSize}) => {
+const VideoAudioCard = ({cardSize, isLobby=false}) => {
 
   const [videoOn, setVideoOn] = useState(false);
   const [micOn, setMicOn] = useState(false);
@@ -162,6 +163,7 @@ const VideoAudioCard = ({cardSize}) => {
 
       {/* minimize and maximize buttons */}
       <Button
+        display={isLobby ? 'none': ''}
         position="absolute"
         top="20px"
         right="20px"
