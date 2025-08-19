@@ -18,7 +18,7 @@ import { useEffect, useRef } from "react";
     const ClipboardIconButton = () => {
       return (
         <Clipboard.Trigger asChild borderRadius="full">
-          <IconButton size="xl" bg="surface-container" color="on-surface" _hover={{borderRadius:'full', bg:'surface-container-highest'}}>
+          <IconButton size="xl" bg="surface-container-highest" borderRadius='full' color="on-surface" _hover={{bg:'outline-variant'}}>
             <Clipboard.Indicator />
           </IconButton>
         </Clipboard.Trigger>
@@ -61,7 +61,7 @@ import { useEffect, useRef } from "react";
                     Send this link to person you want to meet with. Make sure that you save it so that you can use it later, too.
                   </Text>
                   <Clipboard.Root ref={copyBtnRef} value={meetingLink}>
-                    <Group borderRadius="4px" w="full" bg="surface-container" color="on-surface-variant">
+                    <Group borderRadius="4px" w="full" bg="surface-container-highest" color="on-surface">
                       <Clipboard.ValueText fontWeight="medium" gap="0.5rem" pl=".75rem" />
                       <Spacer />
                       <ClipboardIconButton />

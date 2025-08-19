@@ -10,8 +10,8 @@ const LandingPage = () => {
   return (
     <Box
       fontFamily="body"
-      bg="surface-dim"
-      color="on-surface-variant"
+      bg="background"
+      color="on-background"
       w="100vw" h="100vh"
       display="flex"
       flexDirection="column"
@@ -19,7 +19,7 @@ const LandingPage = () => {
     >
       {/* Navigation Bar */}
       <Box
-        bg="surface-container"
+        bg="surface-low"
         p="1" 
         borderBottomWidth="1px"
         borderColor={useColorModeValue("border.light", "border.dark")}

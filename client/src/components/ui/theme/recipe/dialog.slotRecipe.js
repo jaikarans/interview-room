@@ -10,7 +10,7 @@ export const dialogRecipe = defineSlotRecipe({
     },
     
     content: {
-      bg: "surface-bright",
+      bg: "surface-container",
       color: "on-surface",
       userSelect: "none",
       borderRadius: "28px",
@@ -52,7 +52,8 @@ export const dialogRecipe = defineSlotRecipe({
       transform:"translateY(-50%)",
       w: "48px",
       h: "48px",
-      _hover: {borderRadius:'full', bg:'surface-container-highest'},
+      borderRadius:'full',
+      _hover: {bg:'outline-variant'},
       
     },
         
