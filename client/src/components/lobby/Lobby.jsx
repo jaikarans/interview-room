@@ -1,10 +1,16 @@
 import { Box, Button, HStack, Spacer, Spinner, Text, VStack } from "@chakra-ui/react";
 import VideoAudioCard from "./VideoAudioCard";
 import { useState } from "react";
+import { customTheme } from "../ui/theme";
+import { useColorModeValue } from "../ui/color-mode";
+
 
 const Lobby = () => {
 
-	const [isSocketConneted, setIsSocketConneted] = useState(true);
+	const [isSocketConneted, setIsSocketConneted] = useState(false);
+	
+	const primaryColor = customTheme.theme.semanticTokens.colors['outline-variant'].value;
+	const spinnerTrackerColor = useColorModeValue(primaryColor.base, primaryColor._dark);
 
 
 	return (
@@ -39,7 +45,7 @@ const Lobby = () => {
 						size='lg'
 						animationDuration="1s"
 						color="primary"
-						// css={{ "--spinner-track-color": "colors." }}
+						css={{ "--spinner-track-color": `${spinnerTrackerColor}` }}
 						/>
 					}
 					<Text
@@ -51,6 +57,9 @@ const Lobby = () => {
 					<Button
 						display={isSocketConneted ? 'block' : 'none'}
 						variant='filled'
+						onClick={() => {
+							document.documentElement.requestFullscreen();
+						}}
 					>
 						Join
 					</Button>

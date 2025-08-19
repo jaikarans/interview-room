@@ -2,7 +2,7 @@ import { createSystem, defaultConfig, defineConfig } from "@chakra-ui/react";
 import { buttonRecipe } from "./theme/recipe/button.recipe";
 import { dialogRecipe } from "./theme/recipe/dialog.slotRecipe";
 
-const config = defineConfig({
+export const customTheme = {
   theme: {
     recipes: {
       button: buttonRecipe,
@@ -172,6 +172,8 @@ const config = defineConfig({
       },
     },
   },
-});
+}
+
+const config = defineConfig(customTheme);
 
 export const system = createSystem(defaultConfig, config);
