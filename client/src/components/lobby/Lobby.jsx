@@ -8,9 +8,9 @@ import { useColorModeValue } from "../ui/color-mode";
 const Lobby = () => {
 
 	const [isSocketConneted, setIsSocketConneted] = useState(false);
-	
-	const primaryColor = customTheme.theme.semanticTokens.colors['outline-variant'].value;
-	const spinnerTrackerColor = useColorModeValue(primaryColor.base, primaryColor._dark);
+
+	const outlineVariant = customTheme.theme.semanticTokens.colors['outline-variant'].value;
+	const spinnerTrackerColor = useColorModeValue(outlineVariant.base, outlineVariant._dark);
 
 
 	return (
