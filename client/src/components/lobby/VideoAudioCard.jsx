@@ -1,4 +1,4 @@
-import { Button, Card, HStack } from "@chakra-ui/react";
+import { AspectRatio, Button, Card, HStack } from "@chakra-ui/react";
 import { useRef, useState } from "react";
 import { LuEye, LuEyeClosed, LuMic, LuMicOff, LuVideo, LuVideoOff } from "react-icons/lu";
 import { toaster, Toaster } from "../ui/toaster";
@@ -130,8 +130,10 @@ const VideoAudioCard = ({cardSize, isLobby=false}) => {
     <Card.Root
       // w="1047px"
       // h="588px"
-      w={sizes[cardSize].w}
-      h={sizes[cardSize].h}
+      // w={sizes[cardSize].w}
+      // h={sizes[cardSize].h}
+      w={isLobby ? `${sizes.medium.w}` : "100%"}
+      h={isLobby ? `${sizes.medium.h}` : "100%"}
       borderRadius='3xl'
       opacity={ isCardVisible ? 1 : '0.2' }
       _hover={{ opacity: isCardVisible ? 1 : 0.4 }}
@@ -148,18 +150,20 @@ const VideoAudioCard = ({cardSize, isLobby=false}) => {
     >
       <Toaster />
       <audio ref={audioRef} autoPlay />
-      <video
-        ref={videoRef}
-        muted
-        autoPlay
-        playsInline
-        style={{
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          borderRadius: '24px'
-        }}
-      />
+      <AspectRatio ratio={16 / 9} w="100%" h="100%">
+        <video
+          ref={videoRef}
+          muted
+          autoPlay
+          playsInline
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            borderRadius: '24px'
+          }}
+        />
+      </AspectRatio>
 
       {/* minimize and maximize buttons */}
       <Button
@@ -167,7 +171,7 @@ const VideoAudioCard = ({cardSize, isLobby=false}) => {
         position="absolute"
         top="20px"
         right="20px"
-        color='outline'
+        color='on-surface'
         bg='transparent'
         onClick={toggleVisible}
       >
