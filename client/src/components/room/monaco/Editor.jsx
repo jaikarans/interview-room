@@ -52,10 +52,10 @@ function CustomEditor() {
   }, [monaco, colorMode, bg, borderColor, fontColor]);
 
   return (
-    <div style={{ }}>
+    <div style={{'width': '100%', 'height': '100%'}}>
       <Editor
-        width="50vw"
-        height="50vh"
+        width="100%"
+        height="100%"
         theme={colorMode === 'light' ? 'customThemeLight' : 'customThemeDark'}
         defaultLanguage="python" // Set the default language to Python
         defaultValue={[
