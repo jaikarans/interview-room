@@ -56,7 +56,7 @@ function CustomEditor() {
       <Editor
         width="50vw"
         height="50vh"
-        theme={colorMode == 'light' ? 'customThemeLight' : 'customThemeDark'}
+        theme={colorMode === 'light' ? 'customThemeLight' : 'customThemeDark'}
         defaultLanguage="python" // Set the default language to Python
         defaultValue={[
           "# comments is test",

@@ -15,8 +15,8 @@ const Lobby = () => {
 
 	return (
 		<Box
-			bg="surface-dim"
-			color='on-surface'
+			bg="background"
+			color='on-background'
 			display='flex'
 			alignItems='center'
 			justifyContent='center'
