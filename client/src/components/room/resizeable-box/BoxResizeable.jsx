@@ -1,11 +1,18 @@
 import { Box } from "@chakra-ui/react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-const BoxResizeable = ({ children }) => {
+const BoxResizeable = ({ children, index = 0 }) => {
   const [size, setSize] = useState({ width: 400, height: 300 });
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const boxRef = useRef(null);
+
+   // Initial placement (top-left, staggered by index)
+   useEffect(() => {
+    const startX = (window.innerWidth - (size.width * 1.2)) + index; // shift right each box
+    const startY = 50 + index * (size.height + 50); // shift down each box
+    setPosition({ x: startX, y: startY });
+  }, [index]);
 
   // -------------------- DRAG --------------------
   const startDrag = (e) => {
@@ -87,7 +94,7 @@ const BoxResizeable = ({ children }) => {
       left={`${position.x}px`}
       w={`${size.width}px`}
       h={`${size.height}px`}
-      zIndex='max'
+      zIndex='tooltip'
       // bg="red.400"
       // borderRadius='3xl'
       // border="2px solid"
