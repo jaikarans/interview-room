@@ -1,8 +1,6 @@
 "use client"
 
 import {
-  Avatar,
-  HStack,
   Select,
   createListCollection,
   useSelectContext,
@@ -71,23 +69,27 @@ const colors = createListCollection({
     {
       // name: "",
       id: "DE382C",
-      avatar:
-        "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=100",
       color: '#DE382C'
     },
     {
       // name: "",
       id: "2C47DE",
-      avatar:
-        "https://images.unsplash.com/photo-1523477800337-966dbabe060b?w=100",
       color: '#2C47DE'
     },
     {
       // name: "",
       id: "2CDE4A",
-      avatar:
-        "https://images.unsplash.com/photo-1609712409631-dbbb050746d1?w=100",
       color: '#2CDE4A'
+    },
+    {
+      // name: "",
+      id: "1A1A1A",
+      color: '#1A1A1A'
+    },
+    {
+      // name: "",
+      id: "E0E0E0",
+      color: '#E0E0E0'
     },
   ],
   // itemToString: (item) => item.name,
