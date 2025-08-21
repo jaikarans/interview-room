@@ -6,6 +6,8 @@ import Canvas from "./canvas/Canvas";
 import NavBar from "./NavBar";
 import SelectLang from "./SelectLang";
 import { LuPlay } from "react-icons/lu";
+import PenPreviewIcon from "../icons/PenPreviewIcon";
+import PenColorSelector from "./canvas/PenColorSelector";
 
 const Room = () => {
 
@@ -42,9 +44,8 @@ const Room = () => {
         <VStack bg='surface-container-high' m='2' flex={1} shadow='md' shadowColor='shadow'
           borderRadius='xl'
         >
-          {/* <CustomEditor/> */}
-          <HStack p='2' color='on-surface'>
-            Undo
+          <HStack pb='2' color='on-surface'>
+            <PenColorSelector />
           </HStack>
           <Canvas />
         </VStack>
