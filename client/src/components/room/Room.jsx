@@ -6,7 +6,7 @@ import Canvas from "./canvas/Canvas";
 import NavBar from "./NavBar";
 import SelectLang from "./SelectLang";
 import { LuPlay } from "react-icons/lu";
-import PenColorSelector from "./canvas/PenColorSelector";
+import CanvasToolbar from "./canvas/toolbar/CanvasToolbar";
 
 const Room = () => {
 
@@ -43,9 +43,7 @@ const Room = () => {
         <VStack bg='surface-container-high' m='2' flex={1} shadow='md' shadowColor='shadow'
           borderRadius='xl'
         >
-          <HStack pb='2' color='on-surface'>
-            <PenColorSelector />
-          </HStack>
+          <CanvasToolbar pb='2' bg='surface-container-highest' color='on-surface'/>
           <Canvas />
         </VStack>
         

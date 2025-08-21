@@ -5,8 +5,8 @@ import {
   createListCollection,
   useSelectContext,
 } from "@chakra-ui/react"
-import PenPreviewIcon from "../../icons/PenPreviewIcon";
-import { setPenColor } from "./canvasUtil";
+import PenPreviewIcon from "../../../icons/PenPreviewIcon";
+import { setPenColor } from "../canvasUtil";
 
 const SelectValue = () => {
   const select = useSelectContext();
@@ -22,7 +22,7 @@ const SelectValue = () => {
 const PenColorSelector = () => {
   return (
     <Select.Root
-      mt='0'
+      // mt='0'
       bg='surface-container-highest'
       // borderColor='outline-variant'
       // borderWidth='1px'
