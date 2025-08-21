@@ -2,10 +2,13 @@ import React, { useEffect } from 'react';
 import { Editor, useMonaco } from '@monaco-editor/react';
 import { customTheme } from '../../ui/theme';
 import { useColorMode, useColorModeValue } from '../../ui/color-mode';
+import editorLangs from './editorLangs';
+import { useAppContext } from '../../../AppContext';
 
 function CustomEditor() {
 
   const monaco = useMonaco();
+  const { lang } = useAppContext();
 
   // editor background color
   const colorSurfaceContainerHigh = customTheme.theme.semanticTokens.colors['surface-container-high'].value;
@@ -57,12 +60,8 @@ function CustomEditor() {
         width="100%"
         height="100%"
         theme={colorMode === 'light' ? 'customThemeLight' : 'customThemeDark'}
-        defaultLanguage="python" // Set the default language to Python
-        defaultValue={[
-          "# comments is test",
-          "def factorial(n):",
-          "if n == 0:\n\t\treturn 1\n\telse:\n\t\treturn n * factorial(n-1)\nprint(factorial(5))\n",
-        ].join("\n")}
+        language={`${lang}`}
+        value={`${editorLangs[lang]}`}
         options={{
           minimap: {
             enabled: false,

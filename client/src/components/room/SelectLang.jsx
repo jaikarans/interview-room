@@ -1,28 +1,25 @@
 "use client"
 
-import { Portal, Select, createListCollection, useSelectContext } from "@chakra-ui/react"
-import PenPreviewIcon from "../icons/PenPreviewIcon";
+import { Portal, Select, createListCollection } from "@chakra-ui/react"
+import { useAppContext } from "../../AppContext"
 
-const SelectValue = () => {
-  const select = useSelectContext();
-  const items = select.selectedItems;
-  const { value } = items[0];
-  return (
-    <Select.ValueText placeholder="Select member">
-        {value}
-    </Select.ValueText>
-  )
-}
 
 const SelectLang = () => {
+
+  const { setLang } = useAppContext();
+
   return (
     <Select.Root bg='surface-container-highest'  collection={frameworks} size="sm" width='125px'
-      defaultValue={['python']}
       positioning={{ sameWidth: true }}
       overflow='hidden'
+      defaultValue={['Python']}
+      onChange={(event) => {
+        const lang = event.nativeEvent.target.value;
+        // console.log('jjjj',lang);
+        setLang(lang);
+      }}
     >
-      {/* <Select.HiddenSelect />
-      <Select.Label>Select framework</Select.Label> */}
+      <Select.HiddenSelect />
       <Select.Control
         bg='surface-container-highest'
         borderWidth='1px'
@@ -63,6 +60,7 @@ const frameworks = createListCollection({
     { label: "Python", value: "python" },
     { label: "JavaScript", value: "javascript" },
   ],
+  itemToValue: (item) => item.value,
 })
 
 export default SelectLang;
