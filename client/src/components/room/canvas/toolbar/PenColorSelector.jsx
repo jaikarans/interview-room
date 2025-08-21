@@ -11,7 +11,7 @@ import { setPenColor } from "../canvasUtil";
 const SelectValue = () => {
   const select = useSelectContext();
   const items = select.selectedItems;
-  const { color } = items[0]
+  const { color } = items[0];
   return (
     <Select.ValueText placeholder="Select member">
         <PenPreviewIcon width='50px' color={color}/>
@@ -34,15 +34,20 @@ const PenColorSelector = () => {
       positioning={{ sameWidth: true }}
       onChange={(event) => {
         const penColorHex = `#${event.target.value}`;
-        console.log("A new color was selected:", `${penColorHex}`);
-        console.log("A new color was selected:", event.target);
+        // console.log("A new color was selected:", `${penColorHex}`);
+        // console.log("A new color was selected:", event.target);
         setPenColor(penColorHex);
 
       }}
     >
       <Select.HiddenSelect />
-      <Select.Control>
-        <Select.Trigger >
+      <Select.Control
+        bg='surface-container-highest'
+        borderWidth='1px'
+        _hover={{ borderColor: 'outline-variant' }}
+
+      >
+        <Select.Trigger cursor='pointer'>
           <SelectValue />
         </Select.Trigger>
         <Select.IndicatorGroup >
@@ -50,9 +55,19 @@ const PenColorSelector = () => {
         </Select.IndicatorGroup>
       </Select.Control>
       <Select.Positioner>
-        <Select.Content color='on-surface' bg='surface-container-highest'>
+        <Select.Content color='on-surface' bg='surface-container-high'
+        borderWidth="1px"
+        _hover={{ borderColor: 'outline-variant' }}
+        >
           {colors.items.map((item) => (
-            <Select.Item _hover={{'bg': 'inverse-primary'}} item={item} key={item.id} justifyContent="flex-start">
+            <Select.Item 
+              item={item}
+              key={item.id}
+              justifyContent="flex-start"
+              _hover={{ bg: 'surface-container-highest' }}
+              _selected={{ bg: 'primary-container' }}
+  
+            >
               <PenPreviewIcon width='50px' color={item.color}/>
               {/* {item.name} */}
               <Select.ItemIndicator />
@@ -83,13 +98,13 @@ const colors = createListCollection({
     },
     {
       // name: "",
-      id: "1A1A1A",
-      color: '#1A1A1A'
+      id: "E0E0E0",
+      color: '#E0E0E0'
     },
     {
       // name: "",
-      id: "E0E0E0",
-      color: '#E0E0E0'
+      id: "1A1A1A",
+      color: '#1A1A1A'
     },
   ],
   // itemToString: (item) => item.name,

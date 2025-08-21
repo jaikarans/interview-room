@@ -2,7 +2,7 @@ import { Box, Button, HStack, Spacer, Spinner, Text, VStack } from "@chakra-ui/r
 import VideoAudioCard from "./VideoAudioCard";
 import { useState } from "react";
 import { customTheme } from "../ui/theme";
-import { useColorModeValue } from "../ui/color-mode";
+import { ColorModeButton, useColorModeValue } from "../ui/color-mode";
 
 
 const Lobby = () => {
@@ -24,6 +24,12 @@ const Lobby = () => {
 			h="100vh"
 			
 		>
+			<ColorModeButton
+				position='absolute'
+				top='2'
+				right='2'
+
+			/>
 			<HStack
 				// bg='blue'
 				spaceX='25px'				
