@@ -8,7 +8,7 @@ import { useAppContext } from '../../../AppContext';
 function CustomEditor() {
 
   const monaco = useMonaco();
-  const { lang } = useAppContext();
+  const { lang, setCode } = useAppContext();
 
   // editor background color
   const colorSurfaceContainerHigh = customTheme.theme.semanticTokens.colors['surface-container-high'].value;
@@ -54,6 +54,10 @@ function CustomEditor() {
     monaco.editor.setTheme(colorMode === 'light' ? 'customThemeLight' : 'customThemeDark');
   }, [monaco, colorMode, bg, borderColor, fontColor]);
 
+  const setRunCode = (value) => {
+    setCode(value);
+  }
+
   return (
     <div style={{'width': '100%', 'height': '100%'}}>
       <Editor
@@ -62,6 +66,8 @@ function CustomEditor() {
         theme={colorMode === 'light' ? 'customThemeLight' : 'customThemeDark'}
         language={`${lang}`}
         value={`${editorLangs[lang]}`}
+        defaultValue={`${editorLangs[lang]}`}
+        onChange={setRunCode}
         options={{
           minimap: {
             enabled: false,

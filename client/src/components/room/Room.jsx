@@ -7,8 +7,32 @@ import NavBar from "./NavBar";
 import SelectLang from "./SelectLang";
 import { LuPlay } from "react-icons/lu";
 import CanvasToolbar from "./canvas/toolbar/CanvasToolbar";
+import JsCodebox from "./JsCodebox";
+import { useAppContext } from "../../AppContext";
+import { useEffect } from "react";
 
 const Room = () => {
+
+  const { triggerCodeRun } = useAppContext();
+  
+  // run code with ctrl + Enter 
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      // Check for Ctrl + Enter (or Command + Enter on Mac)
+      if ((event.ctrlKey || event.metaKey) && event.key === "'") {
+        event.preventDefault(); 
+        
+        triggerCodeRun();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+
+    // It removes the event listener when the component unmounts.
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [triggerCodeRun]); 
+
 
   return (
     <VStack
@@ -21,7 +45,7 @@ const Room = () => {
       
     >
       <NavBar />
-
+      <JsCodebox />
       <Box
         display='flex'
         w="100vw"
@@ -34,7 +58,7 @@ const Room = () => {
           <HStack w='100%' pb='2' pl='5.2em' color='on-surface'>
             <SelectLang />
             <Spacer />
-            <Button borderRadius='xl' bg='primary' color='on-primary' size='sm'>
+            <Button onClick={triggerCodeRun} borderRadius='xl' bg='primary' color='on-primary' size='sm'>
               <LuPlay/>
             </Button>
           </HStack>

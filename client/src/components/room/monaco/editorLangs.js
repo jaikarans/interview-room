@@ -1,6 +1,15 @@
 const editorLangs =  {
-  'python': 'print("Hello, World!")',
-  'javascript': 'console.log("Hello, World!");'
+  'python': `def say_hi():
+    print("hi there!!")
+
+# say_hi()`,
+
+  'javascript': `function sayHi() {
+    console.log('hi there!!');
+}
+
+// sayHi();`,
+
 }
 
 export default editorLangs;
