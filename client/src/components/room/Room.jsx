@@ -10,11 +10,21 @@ import CanvasToolbar from "./canvas/toolbar/CanvasToolbar";
 import JsCodebox from "./JsCodebox";
 import { useAppContext } from "../../AppContext";
 import { useEffect } from "react";
+import { Tooltip } from "../ui/tooltip";
+import { useColorModeValue } from "../ui/color-mode";
+import { customTheme } from "../ui/theme";
 
 const Room = () => {
 
   const { triggerCodeRun } = useAppContext();
-  
+
+  // extracting color for tooltip backgound
+  const colorPrimaryContainerHighest = customTheme.theme.semanticTokens.colors['surface-container-highest'].value;
+  const toolpitBackground = useColorModeValue(colorPrimaryContainerHighest.base, colorPrimaryContainerHighest._dark);
+  console.log('tooltip',toolpitBackground)
+  const colorOutline = customTheme.theme.semanticTokens.colors['on-surface-variant'].value;
+  const tooltipTextColor = useColorModeValue(colorOutline.base, colorOutline._dark);
+
   // run code with ctrl + Enter 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -58,9 +68,18 @@ const Room = () => {
           <HStack w='100%' pb='2' pl='5.2em' color='on-surface'>
             <SelectLang />
             <Spacer />
-            <Button onClick={triggerCodeRun} borderRadius='xl' bg='primary' color='on-primary' size='sm'>
-              <LuPlay/>
-            </Button>
+            <Tooltip 
+              content="Ctrl + '"
+              contentProps={{ css: { 
+                "--tooltip-bg": `${toolpitBackground}`,
+                "color": `${tooltipTextColor}`
+                }
+              }}  
+            >
+              <Button onClick={triggerCodeRun} borderRadius='xl' bg='primary' color='on-primary' size='sm'>
+                <LuPlay/>
+              </Button>
+            </Tooltip>
           </HStack>
           <CustomEditor/>
         </VStack>
