@@ -4,13 +4,15 @@ import { useAppContext } from "../../AppContext";
 
 export default function JsCodebox() {
   // 1. Get code and the new runCodeTrigger from context
-  const { code, runCodeTrigger } = useAppContext();
+  const { lang, code, runCodeTrigger } = useAppContext();
   const [iframeContent, setIframeContent] = useState('');
+  console.log('iframe code', code);
+  console.log('iframe lang', lang);
 
   // 2. Use useEffect to run code when the trigger changes
   useEffect(() => {
     // We check if runCodeTrigger > 0 to avoid running on the initial render
-    if (runCodeTrigger > 0) {
+    if (runCodeTrigger > 0 && lang.toLowerCase() === 'javascript') {
       const wrappedCode = `
         <html>
           <body style="font-family: sans-serif; padding:10px;">

@@ -2,11 +2,12 @@
 
 import { Portal, Select, createListCollection } from "@chakra-ui/react"
 import { useAppContext } from "../../AppContext"
+import editorLangs from "./monaco/editorLangs";
 
 
 const SelectLang = () => {
 
-  const { setLang } = useAppContext();
+  const { setLang, setCode } = useAppContext();
 
   return (
     <Select.Root bg='surface-container-highest'  collection={frameworks} size="sm" width='125px'
@@ -15,8 +16,8 @@ const SelectLang = () => {
       defaultValue={['Python']}
       onChange={(event) => {
         const lang = event.nativeEvent.target.value;
-        // console.log('jjjj',lang);
         setLang(lang);
+        setCode(editorLangs[`${lang}`]);
       }}
     >
       <Select.HiddenSelect />
