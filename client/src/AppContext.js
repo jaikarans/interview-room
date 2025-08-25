@@ -7,7 +7,12 @@ export const AppProvider = ({ children }) => {
   // to run the code
   const [code, setCode] = useState('print("hello")');
   const [runCodeTrigger, setRunCodeTrigger] = useState(0);
-  const triggerCodeRun = () => setRunCodeTrigger(prev => prev + 1); // Increment to ensure change
+  const triggerCodeRun = () => {
+    setShowOutputBox('banner')
+    setRunCodeTrigger(prev => prev + 1); // Increment to ensure change
+  }
+
+  const [showOutputBox, setShowOutputBox] = useState("hide");
 
   const value = {
     lang,
@@ -15,6 +20,7 @@ export const AppProvider = ({ children }) => {
     code, setCode,
     runCodeTrigger, setRunCodeTrigger,
     triggerCodeRun,
+    showOutputBox, setShowOutputBox,
     
   };
 

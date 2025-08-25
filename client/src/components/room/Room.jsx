@@ -55,7 +55,7 @@ const Room = () => {
       
     >
       <NavBar />
-      <JsCodebox />
+      {/* <JsCodebox /> */}
       <Box
         display='flex'
         w="100vw"
@@ -88,6 +88,7 @@ const Room = () => {
         >
           <CanvasToolbar pb='2' bg='surface-container-highest' color='on-surface'/>
           <Canvas />
+          <JsCodebox />
         </VStack>
         
       </Box>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>PyScript Runner</title>
+		<link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css"/>
+		<script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+		<style>
+      * {
+        padding: 0;
+        margin: 0;
+        overflow: hidden;
+      }
+			body {
+				background-color: #a1a1a1;
+				margin: 0;
+				padding: 0;
+			}
+
+      /**
+        * Style the terminal background when
+        * python code has some errors.
+        * other styles are set by python at runtime
+        * in case python code has error this style
+        * helps to look ui colors regular
+        *
+        */
+			.xterm-rows {
+				font-family: Sans-serif;
+				background-color: #f09999;
+			}
+
+      /**
+        * Style the scrollbar for
+        * Chrome, Edge, Safari Browsers
+        *
+      */
+			*::-webkit-scrollbar {
+				width: 12px;
+				width: 12px;
+			}
+
+			*::-webkit-scrollbar-track {
+				background: #D88A8A;
+			}
+
+			*::-webkit-scrollbar-thumb {
+				background: #C07B7B;
+			}
+
+			*::-webkit-scrollbar-thumb:hover {
+				background: #A96D6D;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<script type="py" terminal>
+# ________________________________________________________________
+#|##### Importing Pyscript to change the style of terminal #######|
+#|________________________________________________________________|
+from pyscript import document
+
+# ________________________________________________________________
+#|########### Change the backgroundColor of terminal #############|
+#|________________________________________________________________|
+classes = document.querySelectorAll('.xterm, .xterm-viewport')
+for c in classes:
+  c.style.backgroundColor = '#F09999'
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+# ________________________________________________________________
+#|############## Style the terminal fonts ########################|
+#|________________________________________________________________|
+xterm_rows = document.querySelectorAll('.xterm-rows')
+for c in xterm_rows:
+  c.style.color = '#6B78E8'
+  # c.style.fontSize = '50px'
+  c.style.fontFamily = 'Sans-serif'
+  # c.style.fontWeight = 'bold'
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+# ________________________________________________________________
+#|######################## User Code Start #######################|
+#|________________________________________________________________|
+${code}
+
+print()
+print()
+print()
+# ________________________________________________________________
+#|######################## User Code End #########################|
+#|________________________________________________________________|
+		</script>
+	</body>
+</html>
