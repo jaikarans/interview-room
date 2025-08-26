@@ -79,6 +79,7 @@ const Canvas = () => {
       as="canvas"
       bg='surface-container-high'
       onMouseDown={() => (setIsDrawing(true))}
+      cursor="pointer"
     />
   );
 }
