@@ -1,6 +1,6 @@
 "use client"
 
-import { Box, HStack, Image, Spacer, Text } from "@chakra-ui/react";
+import { Box, HStack, Image, Link, Spacer, Text } from "@chakra-ui/react";
 import { ColorModeButton, useColorModeValue } from "./ui/color-mode";
 import MeetingHero from "./MeetingHero";
 
@@ -80,6 +80,22 @@ const LandingPage = () => {
             />
           </Box>
         </HStack>
+        {/* --- START: FOOTER CODE ADDED HERE --- */}
+        <Box
+          position="absolute"
+          bottom="0"
+          width="100%"
+          textAlign="center"
+          py={4}
+        >
+          <Text fontSize="sm">
+            <Link href="https://madewithloveinindia.org" isExternal>
+              Made with <Box as="span" color="red.500" aria-label="Love">&hearts;</Box> in India
+            </Link>
+          </Text>
+        </Box>
+        {/* --- END: FOOTER CODE ADDED HERE --- */}
+
       </Box>
     </Box>
   );

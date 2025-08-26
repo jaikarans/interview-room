@@ -10,11 +10,11 @@ function App() {
   
   return (
     <Routes>
-      {/* <Route path="/" element={<LandingPage />} /> */}
+      <Route path="/" element={<LandingPage />} />
       {/* <Route path="/" element={<Lobby />} /> */}
       {/* <Route path="/:roomId" element={<Room />} /> */}
       {/* <Route path="/" element={<Room />} /> */}
-      <Route path="/" element={<Room />} />
+      {/* <Route path="/" element={<Room />} /> */}
     </Routes>
   );
 }
