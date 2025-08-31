@@ -1,6 +1,6 @@
 import { Box, Button, HStack, Spacer, Spinner, Text, VStack } from "@chakra-ui/react";
 import VideoAudioCard from "./VideoAudioCard";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { customTheme } from "../ui/theme";
 import { ColorModeButton, useColorModeValue } from "../ui/color-mode";
 import { useRoomContext } from "../../RoomContext";
@@ -29,6 +29,7 @@ const Lobby = () => {
         setRoomPopulation(data.msg)
       }
     };
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 	
 	return (

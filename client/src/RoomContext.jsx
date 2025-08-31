@@ -60,6 +60,7 @@ export const RoomProvider = ({ children }) => {
       setIsSocketConneted(false);
     };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ws]);
 
   return <RoomContext.Provider value={value}>{children}</RoomContext.Provider>;
