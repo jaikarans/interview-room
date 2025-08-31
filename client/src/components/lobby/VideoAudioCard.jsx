@@ -1,7 +1,8 @@
 import { AspectRatio, Button, Card, HStack } from "@chakra-ui/react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { LuEye, LuEyeClosed, LuMic, LuMicOff, LuVideo, LuVideoOff } from "react-icons/lu";
 import { toaster, Toaster } from "../ui/toaster";
+import { useRoomContext } from "../../RoomContext";
 
 const sizes = {
   // medium: { w: "1047px", h: "588px" }, // lobby size
@@ -10,19 +11,63 @@ const sizes = {
 };
 
 // cardSize = "medium" | "small"
-const VideoAudioCard = ({cardSize, isLobby=false}) => {
+const VideoAudioCard = ({ isLobby=false, isPeer = false, mediaRef }) => {
 
-  const [videoOn, setVideoOn] = useState(false);
-  const [micOn, setMicOn] = useState(false);
+  const { videoOn, setVideoOn, micOn, setMicOn } = useRoomContext();
+
   const [isCardVisible, setIsCardVisible] = useState(true);
 	
 	const audioRef = useRef(null);
 	const videoRef = useRef(null);
-	const mediaRef = useRef(null); // store MediaStream so we can stop it later
+	// const mediaRef = useRef(null); // store MediaStream so we can stop it later
 
   const toggleVisible = () => {
     setIsCardVisible(!isCardVisible);
   }
+
+  /**
+   * playing localMedia or PeerMedia if already exists
+   */
+  useEffect(() => {
+    if (mediaRef?.current && !isPeer) {  // Only for local (not peer)
+      const audioTracks = mediaRef.current.getAudioTracks();
+      const videoTracks = mediaRef.current.getVideoTracks();
+      
+      // if (audioRef.current && audioTracks.length > 0) {
+      //   audioRef.current.srcObject = new MediaStream(audioTracks);
+      //   audioRef.current.play().catch(err => console.log('Audio play error:', err));
+      // }
+      
+      if (videoRef.current && videoTracks.length > 0) {
+        videoRef.current.srcObject = new MediaStream(videoTracks);
+        videoRef.current.play().catch(err => console.log('Video play error:', err));
+      }
+      
+      // Sync state with existing tracks
+      setMicOn(audioTracks.some(track => track.readyState === 'live'));
+      setVideoOn(videoTracks.some(track => track.readyState === 'live'));
+    }
+
+    if (mediaRef?.current && isPeer) {  // Only for local (not peer)
+      const audioTracks = mediaRef.current.getAudioTracks();
+      const videoTracks = mediaRef.current.getVideoTracks();
+      
+      if (audioRef.current && audioTracks.length > 0) {
+        audioRef.current.srcObject = new MediaStream(audioTracks);
+        audioRef.current.play().catch(err => console.log('Audio play error:', err));
+      }
+      
+      if (videoRef.current && videoTracks.length > 0) {
+        videoRef.current.srcObject = new MediaStream(videoTracks);
+        videoRef.current.play().catch(err => console.log('Video play error:', err));
+      }
+      
+      // Sync state with existing tracks
+      setMicOn(audioTracks.some(track => track.readyState === 'live'));
+      setVideoOn(videoTracks.some(track => track.readyState === 'live'));
+    }
+  }, [mediaRef, isPeer, setMicOn, setVideoOn]);
+
 
   const toggleMic = async () => {
     if (micOn) {
@@ -63,7 +108,8 @@ const VideoAudioCard = ({cardSize, isLobby=false}) => {
     }
    
     // Bind audio to element
-    if (audioRef.current) {
+    console.log('box peer',isPeer);
+    if (audioRef.current && isPeer) {
       audioRef.current.srcObject = new MediaStream(mediaRef.current.getAudioTracks());
       try {
         await audioRef.current.play();
@@ -128,10 +174,6 @@ const VideoAudioCard = ({cardSize, isLobby=false}) => {
 
   return(
     <Card.Root
-      // w="1047px"
-      // h="588px"
-      // w={sizes[cardSize].w}
-      // h={sizes[cardSize].h}
       w={isLobby ? `${sizes.medium.w}` : "100%"}
       h={isLobby ? `${sizes.medium.h}` : "100%"}
       borderRadius='3xl'
@@ -180,6 +222,7 @@ const VideoAudioCard = ({cardSize, isLobby=false}) => {
 
       {/* video/mic toggle button overlay */}
       <HStack
+        display={isPeer ? 'none' : 'flex'}
         position="absolute"
         bottom="20px"
         left="50%"

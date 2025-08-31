@@ -12,6 +12,11 @@ export const RoomProvider = ({ children }) => {
 
   const wsRef = useRef(null);
 
+  const localMediaRef = useRef(null);
+  const peerMediaRef = useRef(null);
+  const [videoOn, setVideoOn] = useState(false);
+  const [micOn, setMicOn] = useState(false);
+
   const ws = useMemo(() => {
     const socket = new WebSocket("wss://localhost:8443/ws");
     wsRef.current = socket;
@@ -29,6 +34,9 @@ export const RoomProvider = ({ children }) => {
     wsRef,
     isSocketConneted, setIsSocketConneted,
     isJoined, setIsJoined,
+    localMediaRef, peerMediaRef,
+    videoOn, setVideoOn,
+    micOn, setMicOn,
     
   };
 

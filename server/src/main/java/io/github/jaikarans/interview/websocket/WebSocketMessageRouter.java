@@ -28,8 +28,8 @@ public class WebSocketMessageRouter {
         switch (type) {
             case "enter":
                 return roomManager.addToRoom(webSocketMessage, session);
-//            case "offer", "answer":
-////                return roomManager.broadCastWebRtcSignal(message, session);
+            case "offer", "answer":
+                return roomManager.broadCastWebRtcSignal(webSocketMessage, session);
 //            case "chat":
 //                break;
 //            case "code":

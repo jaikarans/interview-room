@@ -8,7 +8,7 @@ import { useRoomContext } from "../../RoomContext";
 
 const Lobby = () => {
 
-	const { isSocketConneted, wsRef } = useRoomContext();
+	const { isSocketConneted, wsRef, localMediaRef, setIsJoined } = useRoomContext();
 
 	const [roomPopulation, setRoomPopulation] = useState("no-one in meeting")
 
@@ -53,7 +53,7 @@ const Lobby = () => {
 				// bg='blue'
 				spaceX='25px'				
 			>
-				<VideoAudioCard cardSize="medium" isLobby={true}/>
+				<VideoAudioCard isLobby={true} mediaRef={localMediaRef} />
 				<Spacer />
 				<VStack
 					// bg='green'
@@ -83,7 +83,8 @@ const Lobby = () => {
 						display={isSocketConneted ? 'block' : 'none'}
 						variant='filled'
 						onClick={() => {
-							document.documentElement.requestFullscreen();
+							// document.documentElement.requestFullscreen();
+							setIsJoined(true);
 						}}
 					>
 						Join

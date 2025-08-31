@@ -13,10 +13,13 @@ import { useEffect } from "react";
 import { Tooltip } from "../ui/tooltip";
 import { useColorModeValue } from "../ui/color-mode";
 import { customTheme } from "../ui/theme";
+import { useRoomContext } from "../../RoomContext";
 
 const Room = () => {
 
   const { triggerCodeRun } = useAppContext();
+  const { localMediaRef, peerMediaRef } = useRoomContext();
+  
 
   // extracting color for tooltip backgound
   const colorPrimaryContainerHighest = customTheme.theme.semanticTokens.colors['surface-container-highest'].value;
@@ -94,10 +97,10 @@ const Room = () => {
       </Box>
         {/* videocards with with z index */}
         <BoxResizeable>
-          <VideoAudioCard cardSize='small'/>
+          <VideoAudioCard mediaRef={localMediaRef}/>
         </BoxResizeable>
         <BoxResizeable index={1}>
-          <VideoAudioCard cardSize='small'/>
+          <VideoAudioCard isPeer={true} mediaRef={peerMediaRef} />
         </BoxResizeable>
     </VStack>
   );

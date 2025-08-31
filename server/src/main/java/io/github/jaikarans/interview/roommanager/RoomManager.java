@@ -86,6 +86,21 @@ public class RoomManager {
         }
     }
 
+    public Mono<Void> broadCastWebRtcSignal(WebSocketMessage webSocketMessage, WebSocketSession session) {
+        String roomId = sessionToRoom.get(session.getId());
+        Set<WebSocketSession> sessions = rooms.get(roomId);
+
+        return Flux.fromIterable(sessions)
+                .filter(s -> !s.getId().equals(session.getId()))
+                .flatMap(s -> s.send(Mono.just(webSocketMessage)
+                )).onErrorResume(e -> {
+                    log.error("Failed to send message from session {}: {}", session.getId(), e.getMessage());
+                    return Mono.empty();
+                })
+                .then();
+
+    }
+
 
     /**
      * Check if a room is empty
