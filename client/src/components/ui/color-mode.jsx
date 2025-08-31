@@ -42,12 +42,8 @@ export const ColorModeButton = React.forwardRef(
     return (
       <ClientOnly fallback={<Skeleton boxSize='8' />}>
             <IconButton
-              bg="surfaceContainer"
-              color="onSurfaceVariant"
-              borderColor="outlineVariant"
+              color="on-surface-variant"
               _hover={{
-                bg: 'secondaryContainer',
-                color: 'onSecondaryContainer',
                 borderColor: 'outline',
               }}
               borderRadius="full"

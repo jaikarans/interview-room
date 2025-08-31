@@ -32,15 +32,15 @@ const VideoAudioCard = ({cardSize, isLobby=false}) => {
         mediaRef.current.removeTrack(audioTrack);
         audioTrack.stop();
       }
-  
+   
       if (audioRef.current) {
         audioRef.current.srcObject = null;
       }
-  
+   
       setMicOn(false);
       return;
     }
-  
+   
     // Request audio
     let audioStream;
     try {
@@ -53,7 +53,7 @@ const VideoAudioCard = ({cardSize, isLobby=false}) => {
       });
       return;
     }
-  
+   
     // Initialize mediaRef if not exists
     if (!mediaRef.current) {
       mediaRef.current = new MediaStream(audioStream.getAudioTracks());
@@ -61,7 +61,7 @@ const VideoAudioCard = ({cardSize, isLobby=false}) => {
       // Add new audio tracks to existing stream
       audioStream.getAudioTracks().forEach(track => mediaRef.current?.addTrack(track));
     }
-  
+   
     // Bind audio to element
     if (audioRef.current) {
       audioRef.current.srcObject = new MediaStream(mediaRef.current.getAudioTracks());
@@ -71,7 +71,7 @@ const VideoAudioCard = ({cardSize, isLobby=false}) => {
         console.log('Error playing audio element:', err);
       }
     }
-  
+   
     setMicOn(true);
   };
   
@@ -83,15 +83,15 @@ const VideoAudioCard = ({cardSize, isLobby=false}) => {
         mediaRef.current.removeTrack(videoTrack);
         videoTrack.stop();
       }
-  
+   
       if (videoRef.current) {
         videoRef.current.srcObject = null;
       }
-  
+   
       setVideoOn(false);
       return;
     }
-  
+   
     // Request video
     let videoStream;
     try {
@@ -104,14 +104,14 @@ const VideoAudioCard = ({cardSize, isLobby=false}) => {
       });
       return;
     }
-  
+   
     // Initialize or add to existing MediaStream
     if (!mediaRef.current) {
       mediaRef.current = new MediaStream(videoStream.getVideoTracks());
     } else {
       videoStream.getVideoTracks().forEach(track => mediaRef.current?.addTrack(track));
     }
-  
+   
     // Bind to video element
     if (videoRef.current) {
       videoRef.current.srcObject = new MediaStream(mediaRef.current.getVideoTracks());
@@ -121,7 +121,7 @@ const VideoAudioCard = ({cardSize, isLobby=false}) => {
         console.log('Error playing video element:', err);
       }
     }
-  
+
     setVideoOn(true);
   };
   

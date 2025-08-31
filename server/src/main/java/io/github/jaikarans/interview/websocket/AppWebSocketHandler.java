@@ -1,5 +1,6 @@
 package io.github.jaikarans.interview.websocket;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,12 +20,21 @@ public class AppWebSocketHandler implements WebSocketHandler {
 
     @Override
     public Mono<Void> handle(@NonNull WebSocketSession session) {
-        Flux<String> input = session.receive()
-                .map(WebSocketMessage::getPayloadAsText)
-                .doOnNext(msg -> router.route(msg, session)); // Route each message
+        return session.receive()
+            .flatMap(msg -> {
+                try {
+                    return router.route(msg, session);  // returns Mono<WebSocketMessage>
+                } catch (Exception e) {
+                    return Mono.just(session.textMessage("Error: " + e.getMessage()));
+                }
+            })
+            .then()
+            .doFinally(signalType -> {
+                log.info("Closing session {} due to {}", session.getId(), signalType);
+                router.removeSession(session);
+            })
+            .then();
 
-        // Optional output stream (not needed if you send manually via session.send)
-        return input.then();
     }
 
 }

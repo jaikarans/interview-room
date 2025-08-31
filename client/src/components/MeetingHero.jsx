@@ -1,42 +1,37 @@
 "use client"
 
 import { Box, Button, Card, Input, Menu, Portal, Spacer } from "@chakra-ui/react";
-import axios from "axios";
 import { Toaster, toaster } from "./ui/toaster";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import MeetingLinkPopup from "./MeetingLinkPopup";
+import api from "../api";
 
 
 const MeetingHero = (props) => {
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [meetingLink, setMeetingLink] = useState('');
+  const inputRef = useRef();
+
+  console.log('api.link', api.defaults.baseURL)
 
   const createMeeting = async () => {
-    await axios.post('/rooms')
+    await api.post('/rooms')
       .then((res) => {
         setIsPopupOpen(true);
         const meetingPageLink = window.location.origin+ '/' + res.data.id;
         setMeetingLink(meetingPageLink);
       })
       .catch((err) => {
-        // for testing popup dialog
-        setIsPopupOpen(true);
-        // const meetingPageLink = window.location.origin+ '/' + 'abc-def-ijk';
-        const meetingPageLink = 'interview-room.com/abc-def-efg';
-        setMeetingLink(meetingPageLink);
-        console.log('llll', isPopupOpen,meetingPageLink);
-
-        // show a error toast to user
-        // toaster.error({
-        //   title: err.code,
-        //   description: err.message,
-        // });
+        toaster.error({
+          title: err.code,
+          description: err.message,
+        });
       });
   }
 
   const createInstantMeeting = async () => {
-    await axios.post('/rooms')
+    await api.post('/rooms')
       .then((res) => {
         window.location.href = window.location.origin + '/' + res.data.id;
       })
@@ -47,6 +42,18 @@ const MeetingHero = (props) => {
           description: err.message,
         });
       });
+  }
+
+  const handleJoin = () => {
+    const inputStr = inputRef.current.value;
+    if (inputStr === '') return;
+    if (inputStr.includes('http')) {
+      // full link like http://localhost:3000/abc-def-ijk
+      window.location.href = inputStr;
+    } else {
+      // only id like abc-def-ijk
+      window.location.href = window.location.origin + '/' + inputStr;
+    }
   }
 
   return(
@@ -143,6 +150,7 @@ const MeetingHero = (props) => {
         >
           <Input
             // flexGrow={1}
+            ref={inputRef}
             border="1px solid"
             borderRadius="0.75rem"
             fontSize="1rem"
@@ -150,7 +158,7 @@ const MeetingHero = (props) => {
             placeholder="Enter a code or link"
           />
           <Spacer />
-          <Button variant="textButton"> Join </Button>
+          <Button variant="textButton" onClick={handleJoin}> Join </Button>
         </Box>
       </Card.Footer>
     </Card.Root>
